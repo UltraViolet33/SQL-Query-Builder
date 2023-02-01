@@ -7,6 +7,6 @@ use App\Finder;
 $finder = new Finder();
 
 
-$sql = Finder::select('user')->where('age > 18');
+$sql = Finder::select('user')->where("age > 10");
 
 echo Finder::getSql();
