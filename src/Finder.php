@@ -23,4 +23,23 @@ class Finder
 
         return self::$instance;
     }
+
+    public static function where($cond = NULL)
+    {
+        self::$where[0] = ' WHERE ' . $cond;
+        return self::$instance;
+    }
+
+    public static function and($column)
+    {
+        self::$where[] = trim(' AND ' . $column);
+        return self::$instance;
+    }
+
+    public static function getSql()
+    {
+        self::$sql = self::$prefix . implode(" ", self::$where);
+        // preg_replace('/ /', ' ', self::$sql);
+        return trim(self::$sql);
+    }
 }
