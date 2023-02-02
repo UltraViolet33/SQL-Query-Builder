@@ -25,4 +25,11 @@ class Select
         $this->prefix = 'SELECT ' . implode(";", $columns) . ' FROM ' . $tableName;
         return $this;
     }
+
+
+    public function where(string $condition): self
+    {
+        $this->where[0] = ' WHERE ' . $condition;
+        return $this;
+    }
 }

@@ -51,4 +51,15 @@ class SelectTest extends TestCase
         $this->selectClass->selectColumns("posts", ["id, title, category_id"]);
         $this->assertEquals("SELECT id, title, category_id FROM posts", $this->selectClass->prefix);
     }
+
+    
+    public function testWhere(): void
+    {
+        $this->selectClass->where("username = bob");
+        $this->assertEquals(" WHERE username = bob", $this->selectClass->where[0]);
+    
+        
+        $this->selectClass->where("username = bob AND age > 30");
+        $this->assertEquals(" WHERE username = bob AND age > 30", $this->selectClass->where[0]);
+    }
 }
