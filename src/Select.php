@@ -32,4 +32,12 @@ class Select
         $this->where[0] = ' WHERE ' . $condition;
         return $this;
     }
+
+
+    public function getSql(): string
+    {
+        $this->sql = $this->prefix . implode(" ", $this->where);
+        // preg_replace('/ /', ' ', self::$sql);
+        return trim($this->sql);
+    }
 }
