@@ -39,16 +39,16 @@ class SelectTest extends TestCase
 
     public function testSelectColumns(): void
     {
-        $this->selectClass->selectColumns("products", ["id, name, price"]);
+        $this->selectClass->selectColumns("products", ["id", "name", "price"]);
         $this->assertEquals("SELECT id, name, price FROM products", $this->selectClass->prefix);
 
-        $this->selectClass->selectColumns("users", ["id, firstname, lastname, email"]);
+        $this->selectClass->selectColumns("users", ["id", "firstname", "lastname", "email"]);
         $this->assertEquals("SELECT id, firstname, lastname, email FROM users", $this->selectClass->prefix);
 
-        $this->selectClass->selectColumns("books", ["id, title, author"]);
+        $this->selectClass->selectColumns("books", ["id", "title", "author"]);
         $this->assertEquals("SELECT id, title, author FROM books", $this->selectClass->prefix);
 
-        $this->selectClass->selectColumns("posts", ["id, title, category_id"]);
+        $this->selectClass->selectColumns("posts", ["id", "title", "category_id"]);
         $this->assertEquals("SELECT id, title, category_id FROM posts", $this->selectClass->prefix);
     }
 
@@ -66,5 +66,8 @@ class SelectTest extends TestCase
     {
         $query = $this->selectClass->selectEverything("users")->where("name = bob")->getSql();
         $this->assertEquals("SELECT * FROM users WHERE name = bob", $query);
+
+        $query = $this->selectClass->selectColumns("users", ["id", "firstname", "email"])->where("id = 1")->getSql();
+        $this->assertEquals("SELECT id, firstname, email FROM users WHERE id = 1", $query);
     }
 }

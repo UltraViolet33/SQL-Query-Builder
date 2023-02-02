@@ -22,7 +22,7 @@ class Select
 
     public function selectColumns(string $tableName, array $columns): self
     {
-        $this->prefix = 'SELECT ' . implode(";", $columns) . ' FROM ' . $tableName;
+        $this->prefix = 'SELECT ' . implode(", ", $columns) . ' FROM ' . $tableName;
         return $this;
     }
 
@@ -37,7 +37,6 @@ class Select
     public function getSql(): string
     {
         $this->sql = $this->prefix . implode(" ", $this->where);
-        // preg_replace('/ /', ' ', self::$sql);
         return trim($this->sql);
     }
 }
