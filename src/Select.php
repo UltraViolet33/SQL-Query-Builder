@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 
@@ -12,22 +13,16 @@ class Select
     public array $where = array();
     public array $control = ["", ""];
 
-
-    public function select(string $tableName, string $columns = null): self
+    public function selectEverything(string $tableName): self
     {
-        if ($columns) {
-            $this->prefix = 'SELECT ' . $columns . ' FROM ' . $tableName;
-        } else {
-            $this->prefix = 'SELECT *  FROM ' . $tableName;
-        }
-
+        $this->prefix = 'SELECT * FROM ' . $tableName;
         return $this;
     }
 
 
-    public function selectEverything(string $tableName): self
+    public function selectColumns(string $tableName, array $columns): self
     {
-        $this->prefix = 'SELECT * FROM ' . $tableName;
+        $this->prefix = 'SELECT ' . implode(";", $columns) . ' FROM ' . $tableName;
         return $this;
     }
 }
