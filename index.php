@@ -2,7 +2,7 @@
 
 require_once "./vendor/autoload.php";
 
-use App\Finder;
+use SqlQueryBuilder\App\Finder;
 
 $finder = new Finder();
 
