@@ -8,35 +8,39 @@ namespace SqlQueryBuilder\App;
 
 class Select
 {
-    public string $sql = "";
-    public string $prefix = "";
-    public array $where = array();
+    public static ?self $instance = null;
+    public static string $prefix = "";
+    public static array $where = array();
+    public static string $sql = "";
     public array $control = ["", ""];
 
-    public function selectEverything(string $tableName): self
+
+    public static function selectEverything(string $tableName): self
     {
-        $this->prefix = 'SELECT * FROM ' . $tableName;
-        return $this;
+        self::$instance = new Select();
+        self::$prefix = 'SELECT * FROM ' . $tableName;
+        return self::$instance;
     }
 
 
-    public function selectColumns(string $tableName, array $columns): self
+    public static function selectColumns(string $tableName, array $columns): self
     {
-        $this->prefix = 'SELECT ' . implode(", ", $columns) . ' FROM ' . $tableName;
-        return $this;
+        self::$instance = new Select();
+        self::$prefix = 'SELECT ' . implode(", ", $columns) . ' FROM ' . $tableName;
+        return self::$instance;
     }
 
 
-    public function where(string $condition): self
+    public static function where(string $condition): self
     {
-        $this->where[0] = ' WHERE ' . $condition;
-        return $this;
+        self::$where[0] = ' WHERE ' . $condition;
+        return self::$instance;
     }
 
 
     public function getSql(): string
     {
-        $this->sql = $this->prefix . implode(" ", $this->where);
-        return trim($this->sql);
+        self::$sql = self::$prefix . implode(self::$where);
+        return self::$sql;
     }
 }
