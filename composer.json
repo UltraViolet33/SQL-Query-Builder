@@ -1,4 +1,9 @@
 {
+    "name": "ultraviolet33/sqlquerybuilder",
+    "description": "A SQL query builder",
+    "require": {
+        "php": ">=7.4"
+    },
     "autoload": {
         "psr-4": {
             "SqlQueryBuilder\\App\\": "src/"
@@ -8,7 +13,7 @@
         "psr-4": {
             "SqlQueryBuilder\\App\\Tests\\": "tests/"
         }
-      },
+    },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
     }
