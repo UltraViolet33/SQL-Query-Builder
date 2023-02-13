@@ -10,6 +10,6 @@ class Insert
 {
     public static function insert(string $tableName, array $values): string
     {
-        return "INSERT INTO " . $tableName . "(" . implode(",", $values) . ") VALUES (" . implode(", :", $values) . ");";
+        return "INSERT INTO " . $tableName . "(" . implode(", ", $values) . ") VALUES(:" . implode(", :", $values) . ");";
     }
 }
